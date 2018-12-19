@@ -1,81 +1,34 @@
 package cn.zc.oauth.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.provider.ClientDetails;
-
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
 
 @Data
 @TableName("oauth_client")
-public class OAuthClient implements ClientDetails {
+public class OAuthClient {
 
+    @TableId
+    private Long id;
 
-    @Override
-    public String getClientId() {
-        return null;
-    }
+    private String clientId;
 
-    @Override
-    public Set<String> getResourceIds() {
-        return null;
-    }
+    private String resourceIds;
 
-    @Override
-    public boolean isSecretRequired() {
-        return false;
-    }
+    private String clientSecret;
 
-    @Override
-    public String getClientSecret() {
-        return null;
-    }
+    private String scope;
 
-    @Override
-    public boolean isScoped() {
-        return false;
-    }
+    private String authorizedGrantTypes;
 
-    @Override
-    public Set<String> getScope() {
-        return null;
-    }
+    private String registeredRedirectUri;
 
-    @Override
-    public Set<String> getAuthorizedGrantTypes() {
-        return null;
-    }
+    private Integer accessTokenValiditySeconds;
 
-    @Override
-    public Set<String> getRegisteredRedirectUri() {
-        return null;
-    }
+    private Integer refreshTokenValiditySeconds;
 
-    @Override
-    public Collection<GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    private String additionalInformation;
 
-    @Override
-    public Integer getAccessTokenValiditySeconds() {
-        return null;
-    }
+    private Integer isAutoApprove;
 
-    @Override
-    public Integer getRefreshTokenValiditySeconds() {
-        return null;
-    }
-
-    @Override
-    public boolean isAutoApprove(String s) {
-        return false;
-    }
-
-    @Override
-    public Map<String, Object> getAdditionalInformation() {
-        return null;
-    }
 }

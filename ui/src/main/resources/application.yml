@@ -1,0 +1,23 @@
+server:
+  port: 11001
+  servlet:
+    context-path: /ui
+
+security:
+  oauth2:
+    client:
+      clientId: SampleClientId
+      clientSecret: secret
+      accessTokenUri: http://localhost:11000/oauth/token
+      userAuthorizationUri: http://localhost:11000/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:11000/user/me
+
+debug: false
+
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8

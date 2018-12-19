@@ -1,0 +1,5 @@
+com\ingkey\platform\ui\config\UiWebConfig.class
+com\ingkey\platform\ui\config\UiOAuthConfig.class
+com\ingkey\platform\ui\config\UiSecurityConfig.class
+com\ingkey\platform\ui\UiApplication.class
+com\ingkey\platform\ui\controller\CommonController.class

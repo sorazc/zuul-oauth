@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"cn.zc.oauth.mapper"})
+@MapperScan("cn.zc.oauth.mapper")
 public class OAuthApplication {
 
     public static void main(String[] args) {

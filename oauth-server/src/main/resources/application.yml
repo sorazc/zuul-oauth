@@ -2,7 +2,7 @@ spring:
   application:
     name: oauth-server
   datasource:
-    url: jdbc:mysql://192.168.1.250:3366/platform_product?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://192.168.1.250:3366/platform?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 123456
     driverClassName: com.mysql.jdbc.Driver
@@ -12,3 +12,5 @@ eureka:
       defaultZone: http://localhost:7000/eureka/
 server:
   port: 11000
+
+
