@@ -1,7 +1,6 @@
 server:
   port: 11001
-  servlet:
-    context-path: /ui
+
 
 security:
   oauth2:
@@ -16,6 +15,8 @@ security:
 debug: false
 
 spring:
+  application:
+    name: ui
   thymeleaf:
     cache: false
     prefix: classpath:/templates/

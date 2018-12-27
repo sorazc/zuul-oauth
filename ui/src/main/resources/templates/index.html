@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Spring Security SSO</title>
@@ -8,17 +8,8 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="col-sm-12" sec:authorize="!isAuthenticated()">
-        <h1>Spring Security SSO</h1>
-        <a class="btn btn-primary" th:href="@{/}">Login</a>
-    </div>
-    <div class="col-sm-12" sec:authorize="isAuthenticated()">
-        <h1>Secured Page</h1>
-        Welcome, <span th:text="${#authentication.name}">Name</span>
-        <br/>
-        Your authorities are <span th:text="${#authentication.authorities}">authorities</span>
-    </div>
-</div>
+
+    <div>hello world</div>
+
 </body>
 </html>

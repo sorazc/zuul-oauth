@@ -55,13 +55,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * change access rule of both the /oauth/check_token endpoint and the /oauth/token_key endpoint
      * (default is "denyAll()")
      */
-    /**
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer.tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");
     }
-     */
 
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
@@ -75,9 +73,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //配置了这个 Bean 才会开启密码类型的验证。
                 .authenticationManager(authenticationManager)
                 //用来读取验证用户的信息
-                //.userDetailsService(userDetailsService)
+                .userDetailsService(userDetailsService)
                 //token储存方式
-                .tokenStore(redisTokenStore())
+                //.tokenStore(redisTokenStore())
+                .tokenStore(jwtTokenStore())
                 .tokenEnhancer(jwtAccessTokenConverter())
         ;
     }
@@ -89,20 +88,20 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return tokenStore;
     }
 
-    //@Bean
+    @Bean
     public TokenStore jwtTokenStore() {
         JwtTokenStore jwtTokenStore = new JwtTokenStore(jwtAccessTokenConverter());
         return jwtTokenStore;
     }
 
-    //@Bean
+    @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey("zc");
         return jwtAccessTokenConverter;
     }
 
-    @Bean
+    //@Bean
     public TokenEnhancer tokenEnhancer() {
         return (oAuth2AccessToken, oAuth2Authentication) -> {
             final Map<String, Object> additionalInfo = new HashMap<>(2);
