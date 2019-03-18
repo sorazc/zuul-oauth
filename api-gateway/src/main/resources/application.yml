@@ -22,10 +22,9 @@ zuul:
 security:
   oauth2:
     client:
-      clientId: client1
-      clientSecret: 123456
-      #accessTokenUri: http://localhost:11000/auth/oauth/token
-      #userAuthorizationUri: http://localhost:11000/auth/oauth/authorize
+      clientId: api-gateway
+      accessTokenUri: http://localhost:11000/auth/oauth/token
+      userAuthorizationUri: http://localhost:11000/auth/oauth/authorize
       #logOutUri: http://localhost:11000/auth/oauth/exit
     resource:
       token-info-uri: http://localhost:11000/oauth/check_token

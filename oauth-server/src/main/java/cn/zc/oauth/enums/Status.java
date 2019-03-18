@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum Status {
 
     DISABLED(0, "禁用"),
-    ENABLED(1, "正常")
+    ENABLED(1, "正常"),
     ;
 
     private Integer val;
