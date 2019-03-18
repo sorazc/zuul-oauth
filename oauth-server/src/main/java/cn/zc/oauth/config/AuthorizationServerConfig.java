@@ -61,9 +61,31 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .checkTokenAccess("isAuthenticated()");
     }
 
+    /**
+     * 数据库管理client信息
+     * @param clients
+     * @throws Exception
+     */
+    /**
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(clientDetailsService);
+    }
+    */
+
+    @Override
+    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                    .withClient("web")
+                    .scopes("xx")
+                    .secret(passwordEncoder().encode("123456"))
+                    .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+                .and()
+                    .withClient("api-gateway")
+                    .scopes("xx")
+                    .secret(passwordEncoder().encode("123456"))
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+        ;
     }
 
     @Override

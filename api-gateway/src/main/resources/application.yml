@@ -23,11 +23,14 @@ security:
   oauth2:
     client:
       clientId: api-gateway
-      accessTokenUri: http://localhost:11000/auth/oauth/token
-      userAuthorizationUri: http://localhost:11000/auth/oauth/authorize
+      clientSecret: 123456
+      accessTokenUri: http://localhost:14000/auth/oauth/token
+      userAuthorizationUri: http://localhost:14000/auth/oauth/authorize
       #logOutUri: http://localhost:11000/auth/oauth/exit
     resource:
-      token-info-uri: http://localhost:11000/oauth/check_token
-      prefer-token-info: true
-      jwt:
-        key-uri: http://localhost:11000/oauth/token_key
+      userInfoUri: http://localhost:14000/auth/me
+      preferTokenInfo: false
+#      token-info-uri: http://localhost:11000/oauth/check_token
+#      prefer-token-info: true
+#      jwt:
+#        key-uri: http://localhost:11000/oauth/token_key
