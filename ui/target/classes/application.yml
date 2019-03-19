@@ -7,10 +7,8 @@ eureka:
 
 security:
   oauth2:
-    client:
-      clientId: api-gateway
-      clientSecret: 123456
     resource:
+      id: ui
       userInfoUri: http://localhost:14000/auth/me
       preferTokenInfo: false
       #token-info-uri: http://localhost:14000/auth/oauth/check_token
