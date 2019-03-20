@@ -7,14 +7,18 @@ eureka:
 
 security:
   oauth2:
+    client:
+      client-id: api-gateway
+      client-secret: 123456
+      access-token-uri: http://localhost:14000/auth/oauth/token
+      user-authorization-uri: http://localhost:14000/auth/oauth/authorize
     resource:
-      id: ui
-      userInfoUri: http://localhost:14000/auth/me
-      preferTokenInfo: false
-      #token-info-uri: http://localhost:14000/auth/oauth/check_token
-      #prefer-token-info: true
-      #jwt:
-        #key-uri: http://localhost:14000/auth/oauth/token_key
+      #id: ui
+      user-info-uri: http://localhost:14000/auth/me
+      token-info-uri: http://localhost:14000/auth/oauth/check_token
+      prefer-token-info: true
+      jwt:
+        key-uri: http://localhost:14000/auth/oauth/token_key
 
 debug: false
 

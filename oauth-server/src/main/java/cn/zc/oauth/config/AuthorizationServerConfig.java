@@ -18,11 +18,13 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,6 +92,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        //token enhancer chain
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(
+                Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter())
+        );
+
         endpoints
                 //AuthenticationManage 这个 Bean 来源于 WebSecurityConfigurerAdapter 中的配置
                 //配置了这个 Bean 才会开启密码类型的验证。
@@ -97,24 +105,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //用来读取验证用户的信息
                 .userDetailsService(userDetailsService)
                 //token储存方式
-                //.tokenStore(redisTokenStore())
-                .tokenStore(jwtTokenStore())
-                .tokenEnhancer(jwtAccessTokenConverter())
+                .tokenStore(redisTokenStore())
+                .tokenEnhancer(tokenEnhancerChain)
         ;
     }
 
-    //@Bean
+    @Bean
     public TokenStore redisTokenStore() {
         RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
         tokenStore.setPrefix("zc_");
         return tokenStore;
     }
 
+/*
     @Bean
     public TokenStore jwtTokenStore() {
         JwtTokenStore jwtTokenStore = new JwtTokenStore(jwtAccessTokenConverter());
         return jwtTokenStore;
     }
+*/
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
@@ -123,7 +132,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return jwtAccessTokenConverter;
     }
 
-    //@Bean
+    @Bean
     public TokenEnhancer tokenEnhancer() {
         return (oAuth2AccessToken, oAuth2Authentication) -> {
             final Map<String, Object> additionalInfo = new HashMap<>(2);
